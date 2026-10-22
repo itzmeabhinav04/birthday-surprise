@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For You ♡</title>
+<style>
+:root{--cream:#fff8f0;--white:#fffdfb;--red:#c93649;--red2:#a92739;--ink:#433431;--muted:#8a7771;--pink:#f6e2df;--line:#ead8d0}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+body{min-height:100vh;display:flex;flex-direction:column}
+header{width:min(900px,calc(100% - 36px));margin:0 auto;padding:22px 0;display:flex;justify-content:space-between;align-items:center;font:12px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.logo{color:var(--red);font-weight:bold}
+main{flex:1;display:grid;place-items:center;padding:20px}
+.page{display:none;width:min(680px,100%);text-align:center;animation:appear .55s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.eyebrow{font:700 10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+h1{font-size:clamp(42px,9vw,76px);font-weight:normal;line-height:1.05;letter-spacing:-.04em;margin:0 0 18px}
+h1 em,h2 em{font-weight:normal;color:var(--red)}
+p{color:var(--muted);font-size:16px;line-height:1.8}
+.small{font-size:13px}
+.btn{display:inline-block;border:0;border-radius:999px;background:var(--red);color:#fff;padding:13px 23px;font:600 12px Arial,sans-serif;letter-spacing:.04em;cursor:pointer;margin-top:22px;transition:.2s}
+.btn:hover{background:var(--red2);transform:translateY(-2px)}
+.heart{color:var(--red);font-size:21px;margin-top:24px}
+.cake-wrap{width:250px;max-width:80vw;height:220px;margin:12px auto 18px;position:relative}
+.cake{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:210px;height:100px;background:#f4d8cb;border-radius:12px 12px 18px 18px;box-shadow:inset 0 -12px #e9bdb4}
+.cake:before{content:"";position:absolute;top:-14px;left:0;width:100%;height:30px;background:#fffdfb;border-radius:50%;border-bottom:5px solid #f0d4cb}
+.cake:after{content:"";position:absolute;top:15px;left:0;width:100%;height:12px;background:#c93649;border-radius:50%}
+.plate{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:245px;height:17px;background:#fffdfb;border:1px solid var(--line);border-radius:50%}
+.candle{position:absolute;z-index:2;bottom:121px;width:10px;height:42px;border-radius:3px;background:repeating-linear-gradient(135deg,#fffdfb 0 5px,#c93649 5px 10px)}
+.candle:nth-child(1){left:calc(50% - 28px)}.candle:nth-child(2){left:calc(50% - 5px)}.candle:nth-child(3){left:calc(50% + 18px)}
+.flame{position:absolute;top:-17px;left:0;width:10px;height:15px;border-radius:50% 50% 45% 45%;background:#ffb84d;box-shadow:0 0 16px #ffb84d99;animation:flicker .65s infinite alternate}
+@keyframes flicker{to{transform:scale(.82) rotate(7deg);opacity:.8}}
+.cake-wrap.blown .flame{display:none}
+.smoke{display:none;position:absolute;top:-18px;left:1px;width:8px;height:22px;border-radius:50%;border-left:2px solid #b9a9a3;transform:rotate(15deg)}
+.cake-wrap.blown .smoke{display:block}
+.letter-card{background:var(--white);border:1px solid var(--line);padding:clamp(24px,6vw,48px);text-align:left;max-width:620px;margin:0 auto;box-shadow:0 18px 55px #6e38300b}
+.letter-card h2{text-align:center;font-size:36px;font-weight:normal;margin:0 0 24px}
+.letter-lines{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;color:#b4a29b;font:12px Arial,sans-serif;letter-spacing:.05em}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
+.photo-slot{background:var(--pink);border:1px solid var(--line);padding:8px}
+.photo-slot img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.photo-placeholder{aspect-ratio:3/4;display:grid;place-items:center;color:var(--red);font:11px Arial,sans-serif;letter-spacing:.1em;padding:10px}
+.caption{font-size:12px;margin:10px 0 3px;color:var(--muted)}
+footer{text-align:center;padding:18px;font:10px Arial,sans-serif;letter-spacing:.12em;color:#a38e86}
+@media(max-width:520px){header{font-size:10px}.photo-grid{gap:7px}.photo-slot{padding:5px}.cake-wrap{transform:scale(.9);margin-top:0;margin-bottom:0}.letter-card h2{font-size:30px}}
+</style>
+</head>
+<body>
+<header><div class="logo">a little love note ♡</div><div id="step-label">01 / 03</div></header>
+<main>
+  <!-- PAGE 1: birthday cake. Tap/blow button to extinguish candles and continue. -->
+  <section class="page active" id="page1">
+    <div class="eyebrow">Today is all about you</div>
+    <h1>Happy birthday,<br><em>[HER NAME]</em> ♡</h1>
+    <p>Make a wish, my love.</p>
+    <div class="cake-wrap" id="cake">
+      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
+      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
+      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
+      <div class="cake"></div><div class="plate"></div>
+    </div>
+    <p class="small" id="hint">Take a breath, close your eyes, and blow out your candles.</p>
+    <button class="btn" id="blow">♡ Blow out the candles</button>
+    <div class="heart">♥</div>
+  </section>
+
+  <!-- PAGE 2: replace the sample letter whenever you are ready. -->
+  <section class="page" id="page2">
+    <div class="eyebrow">A little something from me</div>
+    <div class="letter-card">
+      <h2>Dear <em>[HER NAME]</em>,</h2>
+      <p>[Your letter starts here. Write whatever is in your heart — your favourite memories, the little things you love about her, and what you wish for her in this new year.]</p>
+      <p>[Add another paragraph here whenever you're ready. You can make this as personal, funny, or romantic as you like.]</p>
+      <p>[One last thing I want you to know is…]</p>
+      <div class="letter-lines">Always yours, ♡<br><br>[YOUR NAME]</div>
+    </div>
+    <button class="btn" id="toPhotos">A few memories next →</button>
+  </section>
+
+  <!-- PAGE 3: add your own images. See README for exact instructions. -->
+  <section class="page" id="page3">
+    <div class="eyebrow">Our little world</div>
+    <h1>Little moments,<br><em>forever memories.</em></h1>
+    <p>Some of my favourite pieces of us.</p>
+    <div class="photo-grid">
+      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 01</div><p class="caption">[A favourite memory]</p></div>
+      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 02</div><p class="caption">[My favourite smile]</p></div>
+      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 03</div><p class="caption">[Us, being us]</p></div>
+    </div>
+    <h2 style="font-size:32px;font-weight:normal;margin:38px 0 8px">I’d choose you <em>every time.</em> ♥</h2>
+    <p class="small">Happy birthday, my love.</p>
+    <button class="btn" id="restart">Start again ↺</button>
+  </section>
+</main>
+<footer>MADE WITH LOVE, JUST FOR YOU · ♡</footer>
+<script>
+const pages=[document.getElementById('page1'),document.getElementById('page2'),document.getElementById('page3')];
+const label=document.getElementById('step-label');
+function showPage(n){pages.forEach((p,i)=>p.classList.toggle('active',i===n-1));label.textContent=String(n).padStart(2,'0')+' / 03';window.scrollTo({top:0,behavior:'smooth'});}
+document.getElementById('blow').addEventListener('click',()=>{
+  const cake=document.getElementById('cake');
+  if(!cake.classList.contains('blown')){
+    cake.classList.add('blown');
+    document.getElementById('hint').textContent='Wish made. ♥';
+    document.getElementById('blow').textContent='Open your letter →';
+  }else{showPage(2);}
+});
+document.getElementById('toPhotos').addEventListener('click',()=>showPage(3));
+document.getElementById('restart').addEventListener('click',()=>{
+  document.getElementById('cake').classList.remove('blown');
+  document.getElementById('hint').textContent='Take a breath, close your eyes, and blow out your candles.';
+  document.getElementById('blow').textContent='♡ Blow out the candles';
+  showPage(1);
+});
+</script>
+</body>
+</html>
