@@ -2,117 +2,237 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>For You ♡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For you, babyy ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#fff8f0;--white:#fffdfb;--red:#c93649;--red2:#a92739;--ink:#433431;--muted:#8a7771;--pink:#f6e2df;--line:#ead8d0}
+:root{--bg:#fff8f0;--card:#fffdfb;--red:#c93649;--red2:#a92739;--ink:#433431;--muted:#8a7771;--pink:#f6e2df;--line:#ead8d0;--glow:#ffd9d2;--icing:#fffdfb;--sponge:#f4d8cb;--sponge2:#e9bdb4;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1719;--card:#35201f;--ink:#f6e8e2;--muted:#c9aaa2;--pink:#4a2a2b;--line:#5a3837;--glow:#5a2630;--red:#e0586a}}
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
-body{min-height:100vh;display:flex;flex-direction:column}
-header{width:min(900px,calc(100% - 36px));margin:0 auto;padding:22px 0;display:flex;justify-content:space-between;align-items:center;font:12px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.logo{color:var(--red);font-weight:bold}
-main{flex:1;display:grid;place-items:center;padding:20px}
-.page{display:none;width:min(680px,100%);text-align:center;animation:appear .55s ease}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;min-height:100%}
+body{background:radial-gradient(900px 520px at 50% -8%,var(--glow),transparent 70%),var(--bg);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;line-height:1.7;overflow-x:hidden;min-height:100vh}
+.script{font-family:'Pinyon Script','Snell Roundhand',cursive;font-weight:400;color:var(--red)}
+/* drifting hearts */
+.drift{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.drift i{position:absolute;bottom:-40px;color:var(--red);opacity:0;font-style:normal;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.22}90%{opacity:.12}100%{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+main{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:28px 20px 70px}
+.page{display:none;width:min(640px,100%);text-align:center}
 .page.active{display:block}
-@keyframes appear{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.eyebrow{font:700 10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
-h1{font-size:clamp(42px,9vw,76px);font-weight:normal;line-height:1.05;letter-spacing:-.04em;margin:0 0 18px}
-h1 em,h2 em{font-weight:normal;color:var(--red)}
-p{color:var(--muted);font-size:16px;line-height:1.8}
-.small{font-size:13px}
-.btn{display:inline-block;border:0;border-radius:999px;background:var(--red);color:#fff;padding:13px 23px;font:600 12px Arial,sans-serif;letter-spacing:.04em;cursor:pointer;margin-top:22px;transition:.2s}
+.dots{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:5}
+.dots span{width:9px;height:9px;border-radius:50%;border:1.5px solid var(--red);transition:.4s}
+.dots span.on{background:var(--red);transform:scale(1.25)}
+h1{font-weight:400;margin:0}
+.hello{font-size:clamp(22px,5vw,28px);font-style:italic;color:var(--muted);margin:0}
+.big{font-size:clamp(76px,22vw,150px);line-height:.95;margin:2px 0 6px;text-shadow:0 8px 30px color-mix(in srgb,var(--red) 22%,transparent)}
+.sub{font-size:clamp(20px,4.6vw,25px);font-style:italic;margin:0;color:var(--ink)}
+.btn{border:0;border-radius:999px;background:var(--red);color:#fff;padding:15px 30px;font:500 19px 'Cormorant Garamond',Georgia,serif;letter-spacing:.03em;cursor:pointer;margin-top:26px;box-shadow:0 10px 26px color-mix(in srgb,var(--red) 35%,transparent);transition:transform .2s,background .2s}
 .btn:hover{background:var(--red2);transform:translateY(-2px)}
-.heart{color:var(--red);font-size:21px;margin-top:24px}
-.cake-wrap{width:250px;max-width:80vw;height:220px;margin:12px auto 18px;position:relative}
-.cake{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:210px;height:100px;background:#f4d8cb;border-radius:12px 12px 18px 18px;box-shadow:inset 0 -12px #e9bdb4}
-.cake:before{content:"";position:absolute;top:-14px;left:0;width:100%;height:30px;background:#fffdfb;border-radius:50%;border-bottom:5px solid #f0d4cb}
-.cake:after{content:"";position:absolute;top:15px;left:0;width:100%;height:12px;background:#c93649;border-radius:50%}
-.plate{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);width:245px;height:17px;background:#fffdfb;border:1px solid var(--line);border-radius:50%}
-.candle{position:absolute;z-index:2;bottom:121px;width:10px;height:42px;border-radius:3px;background:repeating-linear-gradient(135deg,#fffdfb 0 5px,#c93649 5px 10px)}
-.candle:nth-child(1){left:calc(50% - 28px)}.candle:nth-child(2){left:calc(50% - 5px)}.candle:nth-child(3){left:calc(50% + 18px)}
-.flame{position:absolute;top:-17px;left:0;width:10px;height:15px;border-radius:50% 50% 45% 45%;background:#ffb84d;box-shadow:0 0 16px #ffb84d99;animation:flicker .65s infinite alternate}
-@keyframes flicker{to{transform:scale(.82) rotate(7deg);opacity:.8}}
-.cake-wrap.blown .flame{display:none}
-.smoke{display:none;position:absolute;top:-18px;left:1px;width:8px;height:22px;border-radius:50%;border-left:2px solid #b9a9a3;transform:rotate(15deg)}
-.cake-wrap.blown .smoke{display:block}
-.letter-card{background:var(--white);border:1px solid var(--line);padding:clamp(24px,6vw,48px);text-align:left;max-width:620px;margin:0 auto;box-shadow:0 18px 55px #6e38300b}
-.letter-card h2{text-align:center;font-size:36px;font-weight:normal;margin:0 0 24px}
-.letter-lines{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;color:#b4a29b;font:12px Arial,sans-serif;letter-spacing:.05em}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px}
-.photo-slot{background:var(--pink);border:1px solid var(--line);padding:8px}
-.photo-slot img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
-.photo-placeholder{aspect-ratio:3/4;display:grid;place-items:center;color:var(--red);font:11px Arial,sans-serif;letter-spacing:.1em;padding:10px}
-.caption{font-size:12px;margin:10px 0 3px;color:var(--muted)}
-footer{text-align:center;padding:18px;font:10px Arial,sans-serif;letter-spacing:.12em;color:#a38e86}
-@media(max-width:520px){header{font-size:10px}.photo-grid{gap:7px}.photo-slot{padding:5px}.cake-wrap{transform:scale(.9);margin-top:0;margin-bottom:0}.letter-card h2{font-size:30px}}
+.btn:focus-visible,.slot:focus-visible{outline:3px solid var(--red2);outline-offset:3px}
+/* cake */
+.cake{width:min(300px,78vw);margin:18px auto 0;display:block;overflow:visible}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .6s ease-in-out infinite alternate}
+.flame:nth-of-type(2){animation-delay:.15s}.flame:nth-of-type(3){animation-delay:.3s}
+@keyframes flick{to{transform:scale(.85,1.08) rotate(5deg)}}
+.halo{animation:pulse 1.6s ease-in-out infinite alternate}
+@keyframes pulse{to{opacity:.55}}
+.out .flame,.out .halo{display:none}
+.smoke{opacity:0;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round}
+.out .smoke{animation:puff 2.2s ease-out forwards}
+@keyframes puff{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translateY(-30px)}}
+.wish{min-height:3.4em;margin:14px auto 0;max-width:30ch;color:var(--muted);font-style:italic}
+/* confetti */
+.bit{position:fixed;z-index:9;pointer-events:none;color:var(--red);animation:pop 2.4s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes pop{0%{transform:translate(0,0) scale(.4);opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1);opacity:0}}
+/* letter */
+.letter{position:relative;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:68px clamp(24px,6vw,52px) 40px;text-align:left;margin-top:30px;box-shadow:0 24px 60px color-mix(in srgb,var(--red) 12%,transparent),0 2px 0 var(--line);background-image:repeating-linear-gradient(transparent 0 33px,color-mix(in srgb,var(--line) 55%,transparent) 33px 34px)}
+.seal{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e25a6c,var(--red2));display:grid;place-items:center;color:#ffe9e4;font-size:26px;box-shadow:0 8px 18px rgba(120,20,36,.35)}
+.letter h2{font-size:clamp(44px,10vw,60px);margin:0 0 14px;line-height:1.1;font-weight:400}
+.letter p{margin:0 0 20px;font-size:clamp(19px,4.2vw,22px);line-height:34px;color:var(--ink)}
+.letter p.big-line{font-style:italic;font-size:clamp(22px,5vw,26px)}
+.fill{background:var(--pink);border-radius:4px;padding:0 6px;color:var(--red2);font-style:italic}
+.sign{margin-top:26px;font-style:italic;color:var(--muted);line-height:1.5}
+.sign .script{display:block;font-size:44px;margin-top:6px;line-height:1.2}
+.letter p,.letter h2,.sign{opacity:0;transform:translateY(10px);transition:opacity .9s,transform .9s}
+.letter.read p,.letter.read h2,.letter.read .sign{opacity:1;transform:none}
+.letter.read>*:nth-child(3){transition-delay:.5s}.letter.read>*:nth-child(4){transition-delay:1.5s}.letter.read>*:nth-child(5){transition-delay:2.6s}.letter.read>*:nth-child(6){transition-delay:3.7s}.letter.read>*:nth-child(7){transition-delay:4.8s}.letter.read>*:nth-child(8){transition-delay:5.8s}
+/* photos */
+.h3{font-size:clamp(34px,8vw,50px);line-height:1.15;margin:30px 0 6px;font-weight:400}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,22px);margin:34px 0 14px}
+.slot{background:#fffdfb;padding:9px 9px 8px;border-radius:3px;border:1px solid var(--line);box-shadow:0 14px 30px color-mix(in srgb,var(--red) 14%,transparent);cursor:pointer;color:var(--ink);text-align:center;font:inherit;transition:transform .3s}
+.slot{flex:0 0 calc(50% - 10px)}.slot:nth-child(1){transform:rotate(-3deg)}.slot:nth-child(2){transform:rotate(2.5deg) translateY(12px)}.slot:nth-child(3){transform:rotate(1.5deg)}.slot:nth-child(4){transform:rotate(-2.5deg) translateY(8px)}.slot:nth-child(5){transform:rotate(1deg)}.slot.wide{flex-basis:min(100%,440px)}.slot.wide .ph{aspect-ratio:4/3}@media(min-width:600px){.slot{flex-basis:calc(33.33% - 16px)}}
+.slot:hover{transform:rotate(0) scale(1.04)}
+.slot .ph{aspect-ratio:3/4;background:var(--pink);display:grid;place-items:center;color:var(--red);font-size:13px;line-height:1.3;padding:6px;overflow:hidden}
+.slot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot b{display:block;font:italic 400 clamp(13px,3.4vw,17px)/1.3 'Cormorant Garamond',Georgia,serif;color:#6b5a55;padding:8px 2px 2px}
+.final{margin-top:50px}
+.final .script{font-size:clamp(48px,13vw,84px);line-height:1.05;display:block}
+.final p{font-style:italic;color:var(--muted);margin:8px 0 0}
+.hidden{display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.letter p,.letter h2,.sign{opacity:1;transform:none}}
+
+/* her photos */
+.show{position:relative;overflow:hidden;background:var(--pink)}
+.show img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.5s ease}
+.show img.on{opacity:1;animation:kb 8s ease-out forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.1)}}
+.arch{width:min(190px,52vw);aspect-ratio:3/4;margin:10px auto 50px;border-radius:999px 999px 14px 14px;border:7px solid var(--card);box-shadow:0 0 0 1px var(--line),0 20px 44px color-mix(in srgb,var(--red) 22%,transparent)}
+.reel{width:min(100%,360px);aspect-ratio:3/4;margin:38px auto 0;border:10px solid #fffdfb;border-radius:4px;box-shadow:0 0 0 1px var(--line),0 24px 54px color-mix(in srgb,var(--red) 22%,transparent);transform:rotate(-1.5deg)}
+.reel .cap{position:absolute;left:0;right:0;bottom:0;padding:70px 12px 16px;text-align:center;color:#fff;font:400 clamp(34px,9vw,44px)/1.1 'Pinyon Script','Snell Roundhand',cursive;background:linear-gradient(transparent,rgba(70,16,28,.62));text-shadow:0 2px 12px rgba(0,0,0,.35);transition:opacity .5s}
+.strip{width:100vw;margin:40px 0 0 calc(50% - 50vw);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.track{display:flex;width:max-content;gap:14px;padding:12px 0 18px;animation:slide 48s linear infinite}
+@keyframes slide{to{transform:translateX(calc(-50% - 7px))}}
+.track .p{flex:0 0 auto;width:100px;padding:5px 5px 20px;background:#fffdfb;border:1px solid var(--line);box-shadow:0 10px 22px color-mix(in srgb,var(--red) 16%,transparent)}
+.track .p:nth-child(odd){transform:rotate(-3deg)}.track .p:nth-child(even){transform:rotate(2.5deg) translateY(8px)}
+.track img{display:block;width:100%;height:128px;object-fit:cover}
+@media(prefers-reduced-motion:reduce){.track{animation:none}.show img.on{animation:none}}
 </style>
 </head>
 <body>
-<header><div class="logo">a little love note ♡</div><div id="step-label">01 / 03</div></header>
+<div class="drift" id="drift" aria-hidden="true"></div>
+<div class="dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+
 <main>
-  <!-- PAGE 1: birthday cake. Tap/blow button to extinguish candles and continue. -->
-  <section class="page active" id="page1">
-    <div class="eyebrow">Today is all about you</div>
-    <h1>Happy birthday,<br><em>[HER NAME]</em> ♡</h1>
-    <p>Make a wish, my love.</p>
-    <div class="cake-wrap" id="cake">
-      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
-      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
-      <div class="candle"><span class="flame"></span><span class="smoke"></span></div>
-      <div class="cake"></div><div class="plate"></div>
-    </div>
-    <p class="small" id="hint">Take a breath, close your eyes, and blow out your candles.</p>
-    <button class="btn" id="blow">♡ Blow out the candles</button>
-    <div class="heart">♥</div>
-  </section>
+<!-- PAGE 1 -->
+<section class="page active" id="p1">
+  <h1>
+    <span class="hello">Happy 21st birthday,</span>
+    <span class="script big">babyy</span>
+  </h1>
+  <p class="sub">Make a wish, my love.</p>
 
-  <!-- PAGE 2: replace the sample letter whenever you are ready. -->
-  <section class="page" id="page2">
-    <div class="eyebrow">A little something from me</div>
-    <div class="letter-card">
-      <h2>Dear <em>[HER NAME]</em>,</h2>
-      <p>[Your letter starts here. Write whatever is in your heart — your favourite memories, the little things you love about her, and what you wish for her in this new year.]</p>
-      <p>[Add another paragraph here whenever you're ready. You can make this as personal, funny, or romantic as you like.]</p>
-      <p>[One last thing I want you to know is…]</p>
-      <div class="letter-lines">Always yours, ♡<br><br>[YOUR NAME]</div>
-    </div>
-    <button class="btn" id="toPhotos">A few memories next →</button>
-  </section>
+  <svg class="cake" id="cake" viewBox="0 0 300 270" role="img" aria-label="A birthday cake with three lit candles">
+    <defs>
+      <radialGradient id="g"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#ffb84d" stop-opacity="0"/></radialGradient>
+    </defs>
+    <ellipse cx="150" cy="248" rx="132" ry="14" fill="#fffdfb" stroke="#ead8d0"/>
+    <path d="M52 168h196v68q0 12-12 12H64q-12 0-12-12z" fill="#f4d8cb"/>
+    <path d="M52 218h196v18q0 12-12 12H64q-12 0-12-12z" fill="#e9bdb4"/>
+    <path d="M78 112h144v62H78z" fill="#f4d8cb"/>
+    <path d="M78 156h144v18H78z" fill="#e9bdb4"/>
+    <path d="M46 168c0-14 10-20 22-20h164c12 0 22 6 22 20 0 8-5 12-10 12-6 0-8-5-14-5s-8 8-15 8-9-8-16-8-9 7-15 7-8-8-15-8-8 8-15 8-9-8-16-8-8 7-15 7-9-8-16-8-8 8-15 8-9-8-14-8-8 5-12 5c-5 0-8-4-8-12z" fill="#fffdfb" stroke="#f0d4cb"/>
+    <path d="M72 112c0-12 8-18 18-18h120c10 0 18 6 18 18 0 7-4 11-9 11-6 0-8-5-14-5s-8 7-14 7-8-7-14-7-8 6-14 6-8-6-14-6-8 6-14 6-8-7-14-7-8 6-12 6c-5 0-7-4-7-11z" fill="#fffdfb" stroke="#f0d4cb"/>
+    <path d="M60 196h180" stroke="#c93649" stroke-width="7" stroke-linecap="round" stroke-dasharray="1 14"/>
+    <path d="M150 134c-12-9-24-18-14-27 5-5 11-3 14 2 3-5 9-7 14-2 10 9-2 18-14 27z" fill="#c93649" transform="translate(0,4)"/>
+    <g>
+      <rect x="100" y="52" width="10" height="46" rx="3" fill="#c93649"/><rect x="100" y="52" width="10" height="46" rx="3" fill="url(#st)"/>
+      <rect x="145" y="44" width="10" height="54" rx="3" fill="#fffdfb" stroke="#ead8d0"/>
+      <rect x="190" y="52" width="10" height="46" rx="3" fill="#c93649"/>
+      <path d="M100 62l10 6M100 76l10 6M100 90l10 6M190 62l10 6M190 76l10 6M190 90l10 6M145 56l10 6M145 70l10 6M145 84l10 6" stroke="#fffdfb" stroke-width="3"/>
+    </g>
+    <g class="halo"><circle cx="105" cy="30" r="26" fill="url(#g)"/><circle cx="150" cy="22" r="26" fill="url(#g)"/><circle cx="195" cy="30" r="26" fill="url(#g)"/></g>
+    <path class="flame" d="M105 49c-9-9-5-19 0-26 5 7 9 17 0 26z" fill="#ffb84d"/>
+    <path class="flame" d="M150 41c-9-9-5-19 0-26 5 7 9 17 0 26z" fill="#ffb84d"/>
+    <path class="flame" d="M195 49c-9-9-5-19 0-26 5 7 9 17 0 26z" fill="#ffb84d"/>
+    <path class="smoke" d="M105 46c-6-8 6-12 0-22"/><path class="smoke" d="M150 38c-6-8 6-12 0-22"/><path class="smoke" d="M195 46c-6-8 6-12 0-22"/>
+  </svg>
 
-  <!-- PAGE 3: add your own images. See README for exact instructions. -->
-  <section class="page" id="page3">
-    <div class="eyebrow">Our little world</div>
-    <h1>Little moments,<br><em>forever memories.</em></h1>
-    <p>Some of my favourite pieces of us.</p>
-    <div class="photo-grid">
-      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 01</div><p class="caption">[A favourite memory]</p></div>
-      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 02</div><p class="caption">[My favourite smile]</p></div>
-      <div class="photo-slot"><div class="photo-placeholder">YOUR PHOTO 03</div><p class="caption">[Us, being us]</p></div>
-    </div>
-    <h2 style="font-size:32px;font-weight:normal;margin:38px 0 8px">I’d choose you <em>every time.</em> ♥</h2>
-    <p class="small">Happy birthday, my love.</p>
-    <button class="btn" id="restart">Start again ↺</button>
-  </section>
+  <p class="wish" id="wish">Close your eyes, baby, take a breath, and think of something you want most.</p>
+  <button class="btn" id="blow">Blow out the candles ♡</button>
+  <div class="strip" aria-hidden="true"><div class="track" id="track"></div></div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="p2">
+  <div class="show arch" aria-hidden="true"></div>
+  <article class="letter" id="letter">
+    <div class="seal" aria-hidden="true">♥</div>
+    <h2>Dear <span class="script">babyy,</span></h2>
+    <p class="big-line">Happy 21st birthday, my baby ❤️🎂🥹<br>Happiest birthday to my favourite personnn ❤️🫂</p>
+    <p>I honestly don’t even know where to start, because there’s so much I wanna tell you. First of all, thank you for being in my life and for being with me. I’m really so lucky to have you, and I don’t think you realise how much you mean to me. You make me happy in ways you don’t even know, and even the smallest things you do mean so much to me. Just talking to you or seeing your messages can make my whole day better. ❤️</p>
+    <p>I know I’m not perfect, and sometimes I might not express my love properly, but trust me, I love you so so much. You’re such a big part of my life, and I’m really thankful that I have you. 🥹❤️</p>
+    <p>Now you’re 21, baby, and I hope you get all the happiness you deserve and achieve all your dreams. I wanna make so many more memories with you, annoy you, make you laugh, and celebrate many more birthdays together. Thank you for choosing me and being in my life. It’s been <span class="fill">249 days</span> with you, and I hope I get to spend countless more days and years with you. ❤️🫂</p>
+    <p>Happy birthday once again, my pretty girl. I’m so happy to have you in my life, and I hope I can keep making you feel loved and special every single day. I love you more than you know, babyyy! Happy 21st, mwahhh 😚❤️🫶🏻</p>
+    <div class="sign">Always yours,<span class="script">Abhinav</span></div>
+  </article>
+  <button class="btn" id="toPhotos">A few of our moments, baby ♡</button>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="p3">
+  <h2 class="h3">Little moments,<br><span class="script" style="font-size:1.35em">big forever.</span></h2>
+  <p class="sub">Some of my favourite pieces of us, my love.</p>
+  <div class="gallery" id="gallery"></div>
+  <input type="file" accept="image/*" class="hidden" id="picker">
+  <div class="show reel" aria-label="Photos of Athira"><div class="cap" id="reelcap"></div></div>
+  <div class="final">
+    <span class="script">I’d choose you, my love,</span>
+    <span class="script">every single time.</span>
+    <p>Happy 21st birthday, my favourite personnn. ♥</p>
+  </div>
+  <button class="btn" id="restart">Read it again, baby ↺</button>
+</section>
 </main>
-<footer>MADE WITH LOVE, JUST FOR YOU · ♡</footer>
+
 <script>
-const pages=[document.getElementById('page1'),document.getElementById('page2'),document.getElementById('page3')];
-const label=document.getElementById('step-label');
-function showPage(n){pages.forEach((p,i)=>p.classList.toggle('active',i===n-1));label.textContent=String(n).padStart(2,'0')+' / 03';window.scrollTo({top:0,behavior:'smooth'});}
-document.getElementById('blow').addEventListener('click',()=>{
-  const cake=document.getElementById('cake');
-  if(!cake.classList.contains('blown')){
-    cake.classList.add('blown');
-    document.getElementById('hint').textContent='Wish made. ♥';
-    document.getElementById('blow').textContent='Open your letter →';
-  }else{showPage(2);}
+// ✿ ADD YOUR PHOTOS HERE: put an image link, or a data: URI, in "src" for each slot (leave '' to show a tap-to-add placeholder).
+const PHOTOS=[
+  {src:'photos/photo01.jpg',cap:'Snowed in, in love'},
+  {src:'photos/photo02.jpg',cap:'The way we look at each other'},
+  {src:'photos/photo03.jpg',cap:'Adventures with you'},
+  {src:'photos/photo04.jpg',cap:'Late walks, big smiles'},
+  {src:'photos/photo05.jpg',cap:'Home is wherever you are, babyyy',wide:true}
+];
+
+const $=id=>document.getElementById(id);
+const pages=[$('p1'),$('p2'),$('p3')],dots=[...document.querySelectorAll('.dots span')];
+function show(n){
+  pages.forEach((p,i)=>p.classList.toggle('active',i===n));
+  dots.forEach((d,i)=>d.classList.toggle('on',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+  $('letter').classList.toggle('read',n===1);
+}
+// drifting hearts
+(function(){const d=$('drift');for(let i=0;i<14;i++){const h=document.createElement('i');h.textContent='♥';h.style.left=Math.random()*100+'%';h.style.fontSize=(12+Math.random()*20)+'px';h.style.animationDuration=(14+Math.random()*14)+'s';h.style.animationDelay=(-Math.random()*20)+'s';d.appendChild(h)}})();
+// confetti
+function burst(){
+  const b=$('blow').getBoundingClientRect(),cx=innerWidth/2,cy=Math.max(120,b.top-170);
+  for(let i=0;i<42;i++){const e=document.createElement('span');e.className='bit';e.textContent=Math.random()>.3?'♥':'✿';
+    const a=Math.random()*Math.PI*2,r=90+Math.random()*190;
+    e.style.cssText=`left:${cx}px;top:${cy}px;font-size:${12+Math.random()*18}px;--x:${Math.cos(a)*r}px;--y:${Math.sin(a)*r+120}px;--r:${(Math.random()-.5)*360}deg`;
+    document.body.appendChild(e);setTimeout(()=>e.remove(),2500)}
+}
+let blown=false;
+$('blow').addEventListener('click',()=>{
+  if(!blown){blown=true;$('cake').classList.add('out');burst();
+    $('wish').textContent='Wish made, my love. I already know what I’d wish for you: everything.';
+    $('blow').textContent='Open your letter, babyyy ♡';
+  }else show(1);
 });
-document.getElementById('toPhotos').addEventListener('click',()=>showPage(3));
-document.getElementById('restart').addEventListener('click',()=>{
-  document.getElementById('cake').classList.remove('blown');
-  document.getElementById('hint').textContent='Take a breath, close your eyes, and blow out your candles.';
-  document.getElementById('blow').textContent='♡ Blow out the candles';
-  showPage(1);
+$('toPhotos').addEventListener('click',()=>show(2));
+$('restart').addEventListener('click',()=>{blown=false;$('cake').classList.remove('out');
+  $('wish').textContent='Close your eyes, baby, take a breath, and think of something you want most.';
+  $('blow').textContent='Blow out the candles ♡';show(0)});
+const HER=[
+  'photos/photo06.jpg',
+  'photos/photo07.jpg',
+  'photos/photo08.jpg',
+  'photos/photo09.jpg',
+  'photos/photo10.jpg'
+];
+const POS=['50% 40%', '50% 6%', '50% 6%', '50% 46%', '50% 55%'];
+const CAPS=["my pretty girl","my favourite personnn","babyyy","my baby","happy 21st ♡"];
+
+document.querySelectorAll('.show').forEach((el,k)=>{
+  const cap=el.querySelector('.cap');
+  const imgs=HER.map((s,i)=>{const m=new Image();m.src=s;m.alt='';m.style.objectPosition=POS[i];el.insertBefore(m,cap);return m});
+  let n=k%HER.length;imgs[n].classList.add('on');if(cap)cap.textContent=CAPS[n];
+  setInterval(()=>{imgs[n].classList.remove('on');n=(n+1)%imgs.length;imgs[n].classList.add('on');if(cap){cap.style.opacity=0;setTimeout(()=>{cap.textContent=CAPS[n];cap.style.opacity=1},500)}},4600+k*500);
+});
+(function(){const t=$('track');[0,1].forEach(()=>HER.forEach((s,i)=>{const p=document.createElement('div');p.className='p';const m=new Image();m.src=s;m.alt='';m.style.objectPosition=POS[i];p.appendChild(m);t.appendChild(p)}))})();
+// gallery
+let target=null;
+PHOTOS.forEach((p,i)=>{
+  const b=document.createElement('button');b.className='slot'+(p.wide?' wide':'');b.type='button';
+  b.innerHTML=`<div class="ph">${p.src?`<img alt="${p.cap}" loading="lazy" src="${p.src}">`:'tap to add<br>a photo ♡'}</div><b>${p.cap}</b>`;
+  b.onclick=()=>{target=b;$('picker').click()};$('gallery').appendChild(b);
+});
+$('picker').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f||!target)return;
+  const u=URL.createObjectURL(f);target.querySelector('.ph').innerHTML=`<img alt="" src="${u}">`;e.target.value='';
 });
 </script>
 </body>
